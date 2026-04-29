@@ -5,6 +5,20 @@ from typing import Any, Dict, List
 
 class MavlinkMessageBus:
     def __init__(self):
+        """
+        Message bus used for storing every message from proxy communication.
+        Thread safe.
+
+        When MavlinkProxy publishes a message it automatically sends it to this message bus.
+        publish method than sends notification for each subscriber that it got new message.
+
+        Subscribers are then used in command pattern to wait for ACK responses later on.
+
+        Reason for this object is that without it proxy will eat each message and in command methods,
+        when we have to wait for ACK response we will get TimeLimit exceeded.
+
+        This stores each message so we can access it later and react on it.
+        """
         self._queues: Dict[str, List[asyncio.Queue]] = defaultdict(list)
         self._loop: asyncio.AbstractEventLoop = None
 

@@ -48,11 +48,6 @@ class Command(ABC):
         pass
 
     @abstractmethod
-    def _get_command_id(self) -> int:
-        """Return the MAV_CMD_* integer this command sends."""
-        pass
-
-    @abstractmethod
     async def _validate_state(self) -> CommandResult:
         """
         Override this in commands that must confirm a vehicle state change

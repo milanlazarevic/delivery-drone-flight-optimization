@@ -2,7 +2,7 @@ from domain.interfaces.commands.command import Command, CommandResult, CommandSt
 from pymavlink import mavutil
 from typing import Any, Dict, List
 
-
+#TODO
 class UploadMissionCommand(Command):
     ACK_TIMEOUT = 5.0
     ITEM_TIMEOUT = 5.0
@@ -18,9 +18,6 @@ class UploadMissionCommand(Command):
             0  # opaque_id — always 0 for ArduPilot
         )
         print(f"[DEBUG] Sent MISSION_COUNT({len(waypoints)}), waiting to see what FC replies...")
-
-    def _get_command_id(self) -> int:
-        return mavutil.mavlink.MAVLINK_MSG_ID_MISSION_COUNT
 
     async def _wait_for_ack(self) -> CommandResult:
         """
@@ -106,5 +103,4 @@ class UploadMissionCommand(Command):
                 )
 
     async def _validate_state(self) -> CommandResult:
-        # handshake is fully validated inside _wait_for_ack
         return self._result(True, CommandStatus.SUCCESS, "Mission upload complete")

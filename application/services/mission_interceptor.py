@@ -1,6 +1,5 @@
 from domain.entities.waypoint import Waypoint
 from domain.entities.mission import Mission
-#TODO add comments
 
 class MissionInterceptor:
     """Intercepts messages from QGC -> ArduPilot SITL that contains MISSION prefix. Specific

@@ -12,8 +12,5 @@ class ClearMissionCommand(Command):
             mavutil.mavlink.MAV_MISSION_TYPE_MISSION
         )
 
-    def _get_command_id(self) -> int:
-        return 1
-
     async def _validate_state(self) -> CommandResult:
         return self._result(True, CommandStatus.SUCCESS, "Mission cleared")
