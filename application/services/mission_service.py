@@ -57,7 +57,7 @@ class MissionService:
             [{"type": "validation"}, {"type": "preprocessing"}]
         )
         strategy_selector = StrategySelector(
-            strategy=StrategyFactory.create({"type": "simple"})
+            strategy=StrategyFactory.create({"type": "ant-colony"})
         )
         self.optimize_use_case = OptimizeMissionUseCase(pipeline, strategy_selector)
 
