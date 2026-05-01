@@ -6,6 +6,7 @@ from typing import Any, Dict
 @dataclass
 class CommandResult:
     """Command return value after execution."""
+
     success: bool
     status: CommandStatus
     message: str

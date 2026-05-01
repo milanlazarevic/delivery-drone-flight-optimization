@@ -7,9 +7,11 @@ class CommandProcessor:
     """Processor that manages and executes commands."""
 
     def __init__(self):
-        self._command_registry:Dict[str,Callable[[Dict[str, Any]], Command]] = {}
+        self._command_registry: Dict[str, Callable[[Dict[str, Any]], Command]] = {}
 
-    def register_command(self, command_name: str, factory: Callable[..., Command]) -> None:
+    def register_command(
+        self, command_name: str, factory: Callable[..., Command]
+    ) -> None:
         """
         Register a new command.
 
@@ -23,7 +25,9 @@ class CommandProcessor:
         """
         self._command_registry[command_name] = factory
 
-    async def execute_command(self, command_name: str, args: Dict[str, Any]) -> Tuple[bool, str]:
+    async def execute_command(
+        self, command_name: str, args: Dict[str, Any]
+    ) -> Tuple[bool, str]:
         """
         Execute a command by name.
 
@@ -36,7 +40,7 @@ class CommandProcessor:
         :rtype: Tuple[bool, str]
         """
         if command_name not in self._command_registry:
-            return False, f'Unknown command: {command_name}'
+            return False, f"Unknown command: {command_name}"
 
         command = self._command_registry[command_name](args)
         return await command.execute()

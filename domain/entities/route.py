@@ -1,6 +1,7 @@
 from typing import List
 from .waypoint import Waypoint
 
+
 class Route:
     """
     Represents a route composed of an ordered sequence of waypoints. It is
@@ -12,11 +13,10 @@ class Route:
     Attributes:
         waypoints (List[Waypoint]): Ordered list of route waypoints.
     """
+
     def __init__(self, waypoints: List[Waypoint]):
         self.waypoints = waypoints
 
     def __str__(self):
         result = [f"{i+1}. {point}" for i, point in enumerate(self.waypoints)]
         return "Route:\n" + "\n".join(result)
-    
- 

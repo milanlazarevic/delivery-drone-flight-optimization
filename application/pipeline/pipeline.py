@@ -2,6 +2,7 @@ from typing import List
 from domain.entities.mission import Mission
 from .pipeline_step import PipelineStep
 
+
 class Pipeline:
     """
     Represents a sequence of processing steps applied to a mission.
@@ -15,6 +16,7 @@ class Pipeline:
     Attributes:
         steps (List[PipelineStep]): List of processing steps.
     """
+
     def __init__(self, steps: List[PipelineStep]):
         self.steps = steps
 

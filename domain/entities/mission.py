@@ -1,6 +1,7 @@
 from .waypoint import Waypoint
 from typing import List
 
+
 class Mission:
     """
     Represents a drone mission consisting of an ordered list of waypoints
