@@ -1,9 +1,9 @@
-from infrastructure.algorithms.simple_strategy import SimplePathOptimizationStrategy
+from infrastructure.algorithms.greedy_strategy import GreedyPathOptimizationStrategy
 
 
 class StrategyFactory:
     STRATEGY_REGISTRY = {
-        "simple": SimplePathOptimizationStrategy,
+        "simple": GreedyPathOptimizationStrategy,
     }
 
     @staticmethod
