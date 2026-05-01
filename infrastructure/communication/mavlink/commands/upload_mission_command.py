@@ -1,6 +1,6 @@
 from domain.interfaces.commands.command import Command, CommandResult, CommandStatus
 from pymavlink import mavutil
-from typing import Any, Dict, List
+from typing import List
 from domain.entities.waypoint import Waypoint
 
 class UploadMissionCommand(Command):
