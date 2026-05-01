@@ -1,0 +1,13 @@
+ALPHA = 5
+BETA = 3
+NUM_ANTS = 52
+NUM_OF_ITERATIONS = 20
+EVAPORATION_RATE = 0.8
+
+__all__ = [
+    "ALPHA",
+    "BETA",
+    "NUM_ANTS",
+    "NUM_OF_ITERATIONS",
+    "EVAPORATION_RATE",
+]
