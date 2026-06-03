@@ -2,12 +2,14 @@ from infrastructure.algorithms.greedy_strategy import GreedyPathOptimizationStra
 from infrastructure.algorithms.ant_colony.ant_colony_strategy import (
     AntColonyPathOptimizationStrategy,
 )
+from infrastructure.algorithms.no_strategy import NoOptimizationStrategy
 
 
 class StrategyFactory:
     STRATEGY_REGISTRY = {
         "simple": GreedyPathOptimizationStrategy,
         "ant-colony": AntColonyPathOptimizationStrategy,
+        "no-strategy": NoOptimizationStrategy,
     }
 
     @staticmethod
