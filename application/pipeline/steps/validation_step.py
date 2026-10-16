@@ -1,8 +1,10 @@
 from domain.entities.mission import Mission
 from ..pipeline import PipelineStep
 
+
 class ValidationStep(PipelineStep):
     """Validates each mission waypoint."""
+
     def process(self, mission: Mission) -> Mission:
         if mission is None:
             raise ValueError("Mission is None")

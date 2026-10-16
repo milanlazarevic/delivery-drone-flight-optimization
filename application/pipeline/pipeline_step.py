@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from domain.entities.mission import Mission
 
+
 class PipelineStep(ABC):
     """
     Abstract base class representing a single step in a mission processing pipeline.
@@ -12,6 +13,7 @@ class PipelineStep(ABC):
         process(mission: Mission) -> Mission:
             Executes the pipeline step on the given mission.
     """
+
     @abstractmethod
     def process(self, mission: Mission) -> Mission:
         pass

@@ -3,6 +3,7 @@ from application.services.mission_interceptor import MissionInterceptor
 from domain.entities.waypoint import Waypoint
 from .message_bus import MavlinkMessageBus
 
+
 class MavlinkProxy:
     """
     Proxy for mavlink communication between QGC and Ardupilot SITL.
@@ -11,9 +12,12 @@ class MavlinkProxy:
     Mission interceptor is used to wait for specific messages and it should call
     a callback.
     """
-    def __init__(self, mission_interceptor: MissionInterceptor, message_bus: MavlinkMessageBus):
-        self.sitl = mavutil.mavlink_connection('udpin:0.0.0.0:14551')
-        self.qgc  = mavutil.mavlink_connection('udpout:127.0.0.1:14560')
+
+    def __init__(
+        self, mission_interceptor: MissionInterceptor, message_bus: MavlinkMessageBus
+    ):
+        self.sitl = mavutil.mavlink_connection("udpin:0.0.0.0:14551")
+        self.qgc = mavutil.mavlink_connection("udpout:127.0.0.1:14560")
         self._running = False
         self.mission_interceptor = mission_interceptor
         self.message_bus = message_bus
@@ -26,7 +30,6 @@ class MavlinkProxy:
         print(f"SITL connected (system={self.sitl.target_system}, \
                component={self.sitl.target_component})")
         self._run_connection_loop()
-
 
     def _run_connection_loop(self):
         while True:
@@ -48,6 +51,6 @@ class MavlinkProxy:
 
     def get_mission(self):
         return 0
-    
+
     def get_connection(self) -> mavutil.mavfile:
         return self.sitl

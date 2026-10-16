@@ -9,7 +9,7 @@ class ClearMissionCommand(Command):
         self.connection.mav.mission_clear_all_send(
             self.connection.target_system,
             self.connection.target_component,
-            mavutil.mavlink.MAV_MISSION_TYPE_MISSION
+            mavutil.mavlink.MAV_MISSION_TYPE_MISSION,
         )
 
     async def _validate_state(self) -> CommandResult:

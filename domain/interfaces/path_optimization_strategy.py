@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from domain.entities.mission import Mission
 from domain.entities.route import Route
 
+
 class PathOptimizationStrategy(ABC):
     """
     Abstract base class for path optimization strategies.
@@ -14,6 +15,7 @@ class PathOptimizationStrategy(ABC):
         optimize(mission: Mission) -> Route:
             Computes and returns an optimized route derived from the given mission.
     """
+
     @abstractmethod
     def optimize(self, mission: Mission) -> Route:
         """

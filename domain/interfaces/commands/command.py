@@ -8,7 +8,10 @@ from pymavlink import mavutil
 
 class Command(ABC):
     """Abstract base class for mission commands sent to Ardupilot SITL"""
-    def __init__(self, connection: mavutil.mavfile, message_bus, args: Dict[str, Any]) -> None:
+
+    def __init__(
+        self, connection: mavutil.mavfile, message_bus, args: Dict[str, Any]
+    ) -> None:
         self.connection = connection
         self.args = args
         self.status = CommandStatus.PENDING
@@ -30,18 +33,17 @@ class Command(ABC):
             cmd_ack = await self._wait_for_ack()
             if not cmd_ack.success:
                 return cmd_ack
-            
+
             self.status = CommandStatus.ACKED
 
             self.status = CommandStatus.VALIDATING
             return await self._validate_state()
 
-
         except asyncio.CancelledError:
             return self._result(False, CommandStatus.FAILED, "Command cancelled")
         except Exception as e:
             return self._result(False, CommandStatus.FAILED, f"Unexpected error: {e}")
-        
+
     @abstractmethod
     async def _send(self) -> None:
         """Fire the MAVLink message. Do not wait for response here."""
@@ -77,14 +79,15 @@ class Command(ABC):
             if msg is None:
                 break  # timeout expired inside _recv_message
 
-
             if msg.type == mavutil.mavlink.MAV_MISSION_ACCEPTED:
                 return self._result(True, CommandStatus.ACKED, "ACK accepted")
 
             reason = self._mav_result_to_str(msg.type)
             return self._result(False, CommandStatus.FAILED, f"ACK rejected: {reason}")
 
-        return self._result(False, CommandStatus.TIMEOUT, "Timeout: no COMMAND_ACK received")
+        return self._result(
+            False, CommandStatus.TIMEOUT, "Timeout: no COMMAND_ACK received"
+        )
 
     def _result(
         self,
@@ -107,6 +110,5 @@ class Command(ABC):
         return {
             mavutil.mavlink.MAV_MISSION_ERROR: "Generic error / not accepting mission commands at all right now.",
             mavutil.mavlink.MAV_MISSION_UNSUPPORTED_FRAME: "Coordinate frame is not supported.",
-            mavutil.mavlink.MAV_MISSION_UNSUPPORTED:          "Command is not supported.",
+            mavutil.mavlink.MAV_MISSION_UNSUPPORTED: "Command is not supported.",
         }.get(result, f"unknown({result})")
-        
